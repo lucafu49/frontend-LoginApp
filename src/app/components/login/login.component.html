@@ -1,0 +1,5 @@
+<form action="" [formGroup]="loginForm">
+    <input type="email" formControlName="mail" placeholder="Mail">
+    <input type="password" formControlName="password" placeholder="Contraseña">
+    <button type="button" (click)="onSubmit()" [disabled]="!loginForm.valid">Login</button>
+</form>

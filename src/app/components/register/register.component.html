@@ -1,0 +1,7 @@
+<form action="" [formGroup]="registerForm">
+    <input type="text" placeholder="Nombre" formControlName="name">
+    <input type="text" placeholder="Apellido" formControlName="surname">
+    <input type="email" placeholder="Mail" formControlName="mail">
+    <input type="password" placeholder="Contraseña" formControlName="password">
+    <button (click)="onSubmit()">Registrar</button>
+</form>
