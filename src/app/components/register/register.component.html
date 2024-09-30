@@ -1,7 +1,75 @@
-<form action="" [formGroup]="registerForm">
-    <input type="text" placeholder="Nombre" formControlName="name">
-    <input type="text" placeholder="Apellido" formControlName="surname">
-    <input type="email" placeholder="Mail" formControlName="mail">
-    <input type="password" placeholder="Contraseña" formControlName="password">
-    <button (click)="onSubmit()">Registrar</button>
-</form>
+<div class="container">
+    <div class="form-container">
+        <form action="" [formGroup]="registerForm">
+
+            <div class="input-field">
+                <input type="text" formControlName="name" placeholder="Nombre">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="error-container">
+                <div class="text-danger" *ngIf="registerForm.controls['name'].invalid && (registerForm.controls['name'].touched || registerForm.controls['name'].dirty)">
+                  <span *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched">
+                   Es necesario completar el nombre
+                  </span>
+                </div>
+            </div>
+
+            <div class="input-field">
+                <input type="text" formControlName="surname" placeholder="Apellido">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="error-container">
+                <div class="text-danger" *ngIf="registerForm.controls['surname'].invalid && (registerForm.controls['surname'].touched || registerForm.controls['surname'].dirty)">
+                  <span *ngIf="registerForm.get('surname')?.hasError('required') && registerForm.get('surname')?.touched">
+                   Es necesario completar el apellido
+                  </span>
+                </div>
+            </div>
+
+            <div class="input-field">
+                <input type="text" formControlName="mail" placeholder="Mail">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <div class="error-container">
+                <div class="text-danger" *ngIf="registerForm.controls['mail'].invalid && (registerForm.controls['mail'].touched || registerForm.controls['mail'].dirty)">
+                  <span *ngIf="registerForm.get('mail')?.hasError('required') && registerForm.get('mail')?.touched">
+                   Es necesario completar el email
+                  </span>
+                  <span *ngIf="registerForm.get('mail')?.hasError('mail') && registerForm.get('mail')?.touched">
+                   Utilice un correo valido!
+                  </span>
+                </div>
+            </div>
+
+            <div class="input-field">
+                <input type="{{ showPassword ? 'text' : 'password' }}" placeholder=" Ingrese su Contraseña" formControlName="password">
+                <i class="fa-solid fa-eye-slash showHidePw" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility('password')"></i>
+              </div>
+              <div class="error-container">
+                <div class="text-danger" *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].touched || registerForm.controls['password'].dirty)">
+                  <span *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">
+                    Este campo es obligatorio.
+                  </span>
+                  <span *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched || 
+                    registerForm.get('password')?.hasError('maxlength') && registerForm.get('password')?.touched">
+                    Utiliza entre 8 y 20 caracteres.
+                  </span> 
+                </div>
+              </div>
+
+              <div class="input-field">
+                <input type="{{ showConfirmPassword ? 'text' : 'password' }}" placeholder="Confirmar Contraseña" formControlName="confirmPassword">
+                <i class="fa-solid fa-eye-slash showHidePw" [ngClass]="showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility('confirmPassword')"></i>
+              </div>
+              <div class="error-container">
+                <div class="text-danger">
+                  <span *ngIf="registerForm?.errors?.['mismatch'] && registerForm?.touched && (registerForm.controls['confirmPassword'].touched || registerForm.controls['confirmPassword'].dirty)">
+                    Las contraseñas no coinciden.
+                  </span>
+                </div> 
+              </div>
+            <button (click)="onSubmit()">Registrar</button>
+        </form>
+    </div>
+</div>
+

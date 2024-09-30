@@ -1,0 +1,76 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+}
+.form-container{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--hover-primary-color);
+    height: 45vh;
+    width: 20rem;
+    padding: 20px;
+    border-radius: 10px;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-field{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 3px;
+    width: 100%;
+    padding: 3px 10px;
+    background-color: var(--second-color);
+}
+.input-field input{
+    border: transparent;
+    width: 90%;
+    padding: 5px 0;
+    height: 30px;
+    background-color: transparent;
+}
+.input-field input:focus{
+    outline: none;
+}
+.input-field i{
+    font-size: 1.4rem;
+    transform: translateY(10%);
+}
+
+.error-container {
+    position: relative;
+    min-height: 18px;
+}
+.text-danger {
+    color: red; /* Cambia el color del texto a rojo */
+    font-size: 0.7rem; /* Tamaño de fuente */
+}
+
+.form button{
+    border: transparent;
+    background-color: var(--second-color);
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--primary-color);
+    font-size: 20px;
+    cursor: pointer;
+}
+.form button:disabled{
+    color: var(--second-color);
+    background-color: var(--primary-color);
+}
+.link{
+    font-weight: 300;
+    color: var(--second-color);
+}
+.link a{
+    color: var(--hover-second-color);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}

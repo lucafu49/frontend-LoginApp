@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { ClientService } from '../../Services/client.service';
 import { Router } from '@angular/router';
@@ -15,13 +15,16 @@ import { Client } from '../../interfaces/client';
 })
 export class RegisterComponent {
   registerForm : FormGroup;
+  showPassword:any;
+  showConfirmPassword:any;
 
   constructor(private cService: ClientService,private formBuilder:FormBuilder,private route:Router){
     this.registerForm = this.formBuilder.group({
       name:["",[Validators.required,Validators.minLength(3),Validators.maxLength(30)]],
       surname:["",[Validators.required,Validators.minLength(3),Validators.maxLength(30)]],
       mail:["",[Validators.required,Validators.email,Validators.maxLength(50)]],
-      password:["",[Validators.required,Validators.minLength(3),Validators.maxLength(20)]]
+      password:["",[Validators.required,Validators.minLength(8),Validators.maxLength(20)]],
+      confirmPassword:["",[Validators.required,Validators.minLength(8),Validators.maxLength(20)]],
     })
   }
 
@@ -53,4 +56,20 @@ export class RegisterComponent {
       }
     })
   }
+
+  togglePasswordVisibility(field: string) {
+    if (field === 'password') {
+        this.showPassword = !this.showPassword;
+    } else if (field === 'confirmPassword') {
+        this.showConfirmPassword = !this.showConfirmPassword;
+    }
+  }
+
+  passwordMatchValidator(control:AbstractControl){
+    return control.get('password')?.value ===
+    control.get('confirmPassword')?.value
+    ? null
+    : {mismatch:true};
+  }
+
 }

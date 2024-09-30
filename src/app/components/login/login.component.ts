@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../../Services/client.service';
 import { Client } from '../../interfaces/client';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,7 +11,7 @@ import { error } from 'console';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterOutlet,ReactiveFormsModule,CommonModule],
+  imports: [RouterOutlet,ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,6 +20,7 @@ export class LoginComponent{
   loginForm: FormGroup;
   public clientData : Client[] = [];
   public message:string = "";
+  showPassword: boolean= false;
 
   constructor(private cService: ClientService, private router:Router,private formBuilder:FormBuilder){
     this.loginForm = this.formBuilder.group({
@@ -45,5 +46,8 @@ export class LoginComponent{
         this.message = error.error.error
       }
     })
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

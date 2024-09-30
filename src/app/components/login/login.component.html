@@ -1,5 +1,46 @@
-<form action="" [formGroup]="loginForm">
-    <input type="email" formControlName="mail" placeholder="Mail">
-    <input type="password" formControlName="password" placeholder="Contraseña">
-    <button type="button" (click)="onSubmit()" [disabled]="!loginForm.valid">Login</button>
-</form>
+<div class="container">
+    <div class="form-container">
+        <form action="" [formGroup]="loginForm" class="form">
+
+
+            <div class="input-field">
+                <input type="email" formControlName="mail" placeholder="Mail">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+
+
+            <div class="error-container">
+                <div class="text-danger" *ngIf="loginForm.controls['mail'].invalid && (loginForm.controls['mail'].touched || loginForm.controls['mail'].dirty)">
+                  <span *ngIf="loginForm.get('mail')?.hasError('required') && loginForm.get('mail')?.touched">
+                   Es necesario completar el email
+                  </span>
+                  <span *ngIf="loginForm.get('mail')?.hasError('mail') && loginForm.get('mail')?.touched">
+                   Utilice un correo valido!
+                  </span>
+                </div>
+            </div>
+
+
+            <div class="input-field">
+                <input type="{{ showPassword ? 'text' : 'password' }}" formControlName="password" placeholder="Contraseña">
+                <i class="fa-solid fa-eye-slash showHidePw" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'" (click)="togglePasswordVisibility()"></i>
+            </div>
+
+            <div class="error-container">
+                <div class="text-danger" *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].touched || loginForm.controls['password'].dirty)">
+                  <span *ngIf="loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
+                   Es necesario completar la contraseña!
+                  </span>
+                  <span *ngIf="loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched || 
+                      loginForm.get('password')?.hasError('maxlength') && loginForm.get('password')?.touched">
+                    Utiliza entre 6 y 20 caracteres.
+                  </span>        
+                </div> 
+              </div>
+
+            <button type="button" (click)="onSubmit()" [disabled]="!loginForm.valid" class="btn-login">Login</button>
+            <span class="link">No tienes una cuenta? <a routerLink="/register">Registrarse</a></span>
+        </form>
+    </div>
+</div>
+
