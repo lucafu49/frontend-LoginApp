@@ -39,7 +39,11 @@ export class LoginComponent{
 
     this.cService.loginClient(mail,password).subscribe({
       next: (data) => {
+        localStorage.setItem('token',data.token);
+        localStorage.getItem('token');
         console.log(data);
+
+        
       },
       error: (error) => {
         console.error("Error: ", error );
